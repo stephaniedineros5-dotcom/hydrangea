@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Special Hydrangea For You 🌸</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ffe6f2,#f2e6ff,#e6f7ff);
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#gate{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:rgba(255,255,255,.95);
+    z-index:10;
+    text-align:center;
+}
+
+#gate h1{
+    color:#7a5af8;
+    margin-bottom:15px;
+}
+
+#gate p{
+    color:#555;
+    margin-bottom:20px;
+    max-width:500px;
+    padding:0 20px;
+}
+
+button{
+    border:none;
+    padding:14px 30px;
+    border-radius:30px;
+    cursor:pointer;
+    background:#7a5af8;
+    color:white;
+    font-size:16px;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.container{
+    text-align:center;
+    opacity:0;
+    transform:translateY(30px);
+    transition:1.5s;
+}
+
+.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.title{
+    font-size:2rem;
+    color:#6b4eff;
+    margin-bottom:15px;
+}
+
+.message{
+    margin-top:30px;
+    color:#555;
+    max-width:700px;
+    padding:0 20px;
+    line-height:1.8;
+    font-size:1.05rem;
+}
+
+.flower{
+    position:relative;
+    width:300px;
+    height:350px;
+    margin:auto;
+}
+
+.stem{
+    position:absolute;
+    width:12px;
+    height:180px;
+    background:#3fb36a;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:20px;
+    border-radius:20px;
+}
+
+.leaf{
+    position:absolute;
+    width:65px;
+    height:35px;
+    background:#55c878;
+    border-radius:100px 0;
+}
+
+.leaf.left{
+    left:95px;
+    bottom:110px;
+    transform:rotate(-35deg);
+}
+
+.leaf.right{
+    right:95px;
+    bottom:85px;
+    transform:scaleX(-1) rotate(-35deg);
+}
+
+.hydrangea{
+    position:absolute;
+    top:40px;
+    left:50%;
+    transform:translateX(-50%);
+    width:220px;
+    height:220px;
+}
+
+.petal{
+    position:absolute;
+    width:40px;
+    height:40px;
+    background:#8d7cff;
+    border-radius:50%;
+    box-shadow:
+    0 0 8px rgba(141,124,255,.5);
+    animation:float 3s ease-in-out infinite;
+}
+
+.petal::before,
+.petal::after{
+    content:"";
+    position:absolute;
+    width:40px;
+    height:40px;
+    background:inherit;
+    border-radius:50%;
+}
+
+.petal::before{
+    left:-15px;
+}
+
+.petal::after{
+    top:-15px;
+}
+
+.center{
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:#fff8a8;
+    border-radius:50%;
+    top:15px;
+    left:15px;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+.sparkle{
+    position:absolute;
+    color:white;
+    font-size:20px;
+    animation:spark 4s linear infinite;
+}
+
+@keyframes spark{
+    from{
+        transform:translateY(0) rotate(0deg);
+        opacity:0;
+    }
+    20%{
+        opacity:1;
+    }
+    to{
+        transform:translateY(-300px) rotate(360deg);
+        opacity:0;
+    }
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+    <h1>🌸 Small Challenge First 🌸</h1>
+    <p>
+        Before you see the flower, click the button below.
+        Some people are worth a little extra effort. 💜
+    </p>
+    <button onclick="openFlower()">
+        Reveal the Hydrangea ✨
+    </button>
+</div>
+
+<div class="container" id="content">
+
+    <h1 class="title">
+        A Special Hydrangea For You 🌸
+    </h1>
+
+    <div class="flower">
+
+        <div class="hydrangea" id="hydrangea"></div>
+
+        <div class="stem"></div>
+        <div class="leaf left"></div>
+        <div class="leaf right"></div>
+
+    </div>
+
+    <div class="message">
+        Hydrangeas symbolize gratitude, sincerity, and appreciation.
+        <br><br>
+        This flower is a small reminder that you are someone special.
+        Thank you for your kindness, your time, your laughter,
+        and all the little things you probably don't realize
+        make a difference.
+        <br><br>
+        🌸 You deserve flowers too. 🌸
+    </div>
+
+</div>
+
+<script>
+function openFlower(){
+    document.getElementById("gate").style.display="none";
+    document.getElementById("content").classList.add("show");
+}
+
+const flower = document.getElementById("hydrangea");
+
+for(let i=0;i<45;i++){
+
+    const angle = Math.random() * Math.PI * 2;
+    const radius = Math.random() * 75;
+
+    const x = Math.cos(angle) * radius + 90;
+    const y = Math.sin(angle) * radius + 90;
+
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.style.left = x + "px";
+    petal.style.top = y + "px";
+    petal.style.animationDelay = (Math.random()*2)+"s";
+
+    const center = document.createElement("div");
+    center.className = "center";
+
+    petal.appendChild(center);
+    flower.appendChild(petal);
+}
+
+for(let i=0;i<30;i++){
+
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.innerHTML = "✦";
+
+    sparkle.style.left = Math.random()*100 + "vw";
+    sparkle.style.top = Math.random()*100 + "vh";
+    sparkle.style.animationDelay = Math.random()*4 + "s";
+
+    document.body.appendChild(sparkle);
+}
+</script>
+
+</body>
+</html>
